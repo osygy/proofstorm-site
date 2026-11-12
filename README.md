@@ -1,6 +1,6 @@
 # Proofstorm site
 
-The minimal alpha landing page and installer endpoint for [Proofstorm](https://github.com/orangeshyguy21/proofstorm), built with **Astro 7 + Tailwind CSS 4**. The output is a static Cloudflare Pages site with no server adapter or application database.
+The minimal alpha landing page and installer endpoint for [Proofstorm](https://github.com/osygy/proofstorm), built with **Astro 7 + Tailwind CSS 4**. The output is a static Cloudflare Pages site with no server adapter or application database.
 
 ## Local development
 

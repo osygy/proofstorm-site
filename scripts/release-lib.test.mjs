@@ -33,7 +33,7 @@ test('the saved public installer and all checksum receipts verify offline', () =
 
 test('an incomplete newer release fails instead of silently promoting an older one', () => {
   const newer = candidate('v0.1.0-alpha.100', {
-    html_url: 'https://github.com/orangeshyguy21/proofstorm/releases/tag/v0.1.0-alpha.100', assets: [],
+    html_url: 'https://github.com/osygy/proofstorm/releases/tag/v0.1.0-alpha.100', assets: [],
   });
   const selected = selectRelease([fixture.github_release, newer]);
   assert.equal(selected.tag_name, newer.tag_name);

@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.repository == 'orangeshyguy21/proofstorm'
+    if: github.repository == 'osygy/proofstorm'
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
@@ -43,7 +43,7 @@ jobs:
           import urllib.request
           from urllib.parse import urlparse
 
-          repository = 'orangeshyguy21/proofstorm'
+          repository = 'osygy/proofstorm'
           channel = os.environ['RELEASE_CHANNEL']
           expected_tag = os.environ['EXPECTED_TAG']
           origin = os.environ['SITE_URL'].rstrip('/')
