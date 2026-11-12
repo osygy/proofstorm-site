@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 
-export const REPOSITORY = 'orangeshyguy21/proofstorm';
+export const REPOSITORY = 'osygy/proofstorm';
 export const RELEASES_URL = `https://github.com/${REPOSITORY}/releases`;
 export const PLATFORMS = [
   { id: 'linux-amd64', label: 'Linux', architecture: 'x86-64 / AMD64', target: 'x86_64-unknown-linux-gnu' },
