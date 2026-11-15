@@ -3,6 +3,11 @@ import { createHash } from 'node:crypto';
 
 export const REPOSITORY = 'osygy/proofstorm';
 export const RELEASES_URL = `https://github.com/${REPOSITORY}/releases`;
+// Installed Proofstorm (alpha.16 and older) only updates from a feed naming the
+// pre-rename repository, with asset URLs under it; GitHub redirects those URLs
+// to REPOSITORY. Keep until released binaries accept the new name.
+export const FEED_REPOSITORY = 'orangeshyguy21/proofstorm';
+const FEED_RELEASES_URL = `https://github.com/${FEED_REPOSITORY}/releases`;
 export const PLATFORMS = [
   { id: 'linux-amd64', label: 'Linux', architecture: 'x86-64 / AMD64', target: 'x86_64-unknown-linux-gnu' },
   { id: 'macos-arm64', label: 'macOS', architecture: 'Apple Silicon / ARM64', target: 'aarch64-apple-darwin' },
@@ -45,11 +50,11 @@ function digest(value) {
 
 export function describeAsset(asset, tag) {
   assert(asset && /^[A-Za-z0-9._+-]+$/.test(asset.name), 'Invalid asset filename');
-  const url = `${RELEASES_URL}/download/${tag}/${asset.name}`;
-  assert.equal(asset.browser_download_url, url, 'Asset URL must belong to the exact official release');
+  const path = `/download/${tag}/${asset.name}`;
+  assert.equal(asset.browser_download_url, `${RELEASES_URL}${path}`, 'Asset URL must belong to the exact official release');
   assert(asset.state === 'uploaded', `Asset is not uploaded: ${asset.name}`);
   assert(Number.isSafeInteger(asset.size) && asset.size > 0, 'Invalid asset size');
-  return { name: asset.name, url, bytes: asset.size, sha256: digest(asset.digest) };
+  return { name: asset.name, url: `${FEED_RELEASES_URL}${path}`, bytes: asset.size, sha256: digest(asset.digest) };
 }
 
 export function describeRelease(release) {
@@ -82,7 +87,7 @@ export function describeRelease(release) {
   }
   assert(platforms.length > 0, 'Release has no supported platform archives');
   return {
-    schema_version: 1, repository: REPOSITORY, release_id: release.id,
+    schema_version: 1, repository: FEED_REPOSITORY, release_id: release.id,
     version: parsed.version, tag: release.tag_name, channel: parsed.channel,
     published_at: release.published_at, release_url: release.html_url,
     metadata_source: 'github-release-assets', installer, platforms,
